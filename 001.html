@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Braza #001 — O Congresso aprovou o quê essa semana.">
+  <title>Braza #001 — A braza tá acesa.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --verde:   #C8F5A0;
+      --ciano:   #7DD4F0;
+      --lavanda: #A89EF5;
+      --coral:   #F5C4B3;
+      --preto:   #111111;
+      --creme:   #F5F2EC;
+      --branco:  #FFFFFF;
+      --cinza:   #777777;
+      --borda:   2.5px solid #111;
+      --sombra:  4px 4px 0 #111;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--creme); font-family: 'DM Sans', sans-serif; color: var(--preto); line-height: 1.6; }
+
+    /* NAV igual ao index */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--creme); border-bottom: var(--borda);
+      display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 2rem; padding: 0 3rem; height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px;
+      letter-spacing: -1px; text-decoration: none; color: var(--preto);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo svg { width: 18px; height: 24px; }
+    .nav-back {
+      font-size: 13px; color: var(--cinza);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: color .15s;
+    }
+    .nav-back:hover { color: var(--preto); }
+    .nav-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      background: var(--preto); color: var(--verde);
+      padding: 5px 14px; border-radius: 999px;
+    }
+
+    /* HERO DA EDIÇÃO */
+    .edicao-hero {
+      position: relative; overflow: hidden;
+      border-bottom: var(--borda);
+      padding: 4rem 3rem 3rem;
+    }
+    .edicao-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--verde), var(--ciano));
+      opacity: .35;
+    }
+    .edicao-content { position: relative; max-width: 800px; margin: 0 auto; }
+    .edicao-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--preto); color: var(--verde);
+      font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      padding: 5px 14px; border-radius: 999px; margin-bottom: 1.5rem;
+    }
+    .edicao-titulo {
+      font-family: 'Syne', sans-serif; font-size: clamp(30px,4.5vw,52px);
+      font-weight: 800; line-height: 1.05; letter-spacing: -2px;
+      margin-bottom: 1rem;
+    }
+    .edicao-sub { font-size: 18px; color: #333; line-height: 1.7; margin-bottom: 1.5rem; }
+    .edicao-meta-row {
+      display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+      font-size: 13px; color: var(--cinza);
+      padding-top: 1.2rem; border-top: 1.5px solid rgba(0,0,0,.12);
+    }
+    .tag {
+      font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      padding: 3px 10px; border-radius: 999px; border: 1.5px solid var(--preto);
+      text-transform: uppercase;
+    }
+    .tag.verde  { background: var(--verde); }
+    .tag.ciano  { background: var(--ciano); }
+    .tag.coral  { background: var(--coral); }
+    .tag.lavanda{ background: var(--lavanda); }
+
+    /* CORPO DO ARTIGO */
+    .artigo { max-width: 800px; margin: 0 auto; padding: 3rem; }
+
+    /* Bloco de seção dentro da edição */
+    .bloco { margin-bottom: 3.5rem; }
+    .bloco-eyebrow {
+      font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; color: var(--cinza); text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+    }
+    .bloco-eyebrow::after { content:''; flex:1; height:1px; background:rgba(0,0,0,.1); }
+    .bloco-titulo {
+      font-family: 'Syne', sans-serif; font-size: clamp(22px,3vw,32px);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .bloco p { font-size: 16px; line-height: 1.85; color: #333; margin-bottom: 1rem; }
+    .bloco p:last-child { margin-bottom: 0; }
+
+    /* Callout */
+    .callout {
+      border: var(--borda); border-radius: 14px;
+      padding: 1.5rem 2rem; margin: 1.5rem 0;
+      box-shadow: var(--sombra);
+    }
+    .callout.verde  { background: var(--verde); }
+    .callout.ciano  { background: var(--ciano); }
+    .callout.escuro { background: var(--preto); color: #fff; }
+    .callout.escuro p { color: rgba(255,255,255,.8); }
+    .callout-titulo {
+      font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800;
+      margin-bottom: .5rem;
+    }
+    .callout.escuro .callout-titulo { color: var(--verde); }
+
+    /* Fact-check card */
+    .factcheck {
+      border: var(--borda); border-radius: 14px; overflow: hidden;
+      box-shadow: var(--sombra); margin: 1.5rem 0;
+    }
+    .factcheck-quote {
+      background: linear-gradient(135deg, var(--ciano), var(--lavanda));
+      padding: 1.5rem 2rem; border-bottom: var(--borda);
+    }
+    .factcheck-quote blockquote {
+      font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+      font-style: italic; line-height: 1.3; color: var(--preto);
+    }
+    .factcheck-quote cite {
+      display: block; font-size: 12px; color: rgba(0,0,0,.55);
+      margin-top: .5rem; font-style: normal;
+    }
+    .factcheck-resp {
+      background: var(--branco); padding: 1.2rem 2rem;
+    }
+    .factcheck-resp p { font-size: 14px; line-height: 1.7; color: #333; }
+
+    /* Aprende aí */
+    .aprende-bloco {
+      background: var(--preto); border: var(--borda);
+      border-radius: 14px; padding: 2rem;
+      box-shadow: var(--sombra); margin: 1.5rem 0;
+    }
+    .aprende-termo {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px,4vw,42px); font-weight: 800;
+      color: var(--verde); letter-spacing: -1.5px; margin-bottom: .5rem;
+    }
+    .aprende-def { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.8; margin-bottom: 1.2rem; }
+    .aprende-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .aprende-tag {
+      background: rgba(255,255,255,.08); color: rgba(255,255,255,.6);
+      font-size: 12px; padding: 4px 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    /* Navegação entre edições */
+    .nav-edicoes {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: var(--borda); padding: 2rem 3rem;
+      max-width: 800px; margin: 0 auto;
+    }
+    .nav-edicoes a {
+      font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+      text-decoration: none; color: var(--cinza);
+      transition: color .15s;
+    }
+    .nav-edicoes a:hover { color: var(--preto); }
+
+    /* Footer */
+    footer {
+      border-top: var(--borda);
+      padding: 1.5rem 3rem;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--preto);
+    }
+    .footer-logo svg { width: 14px; height: 18px; }
+    .footer-copy { font-size: 12px; color: var(--cinza); }
+
+    @media (max-width: 700px) {
+      .nav { padding: 0 1.2rem; }
+      .edicao-hero, .artigo { padding: 2rem 1.2rem; }
+      .nav-edicoes { padding: 1.5rem 1.2rem; }
+      footer { padding: 1.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <svg viewBox="0 0 40 52" fill="none">
+        <defs>
+          <linearGradient id="lg-e" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#2db84b"/>
+            <stop offset="50%"  stop-color="#1A8FD1"/>
+            <stop offset="100%" stop-color="#6C5CE7"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 2 L38 48 Q29 38 20 38 Q11 38 2 48 Z" fill="url(#lg-e)"/>
+      </svg>
+      BRAZA
+    </a>
+    <a href="../index.html" class="nav-back">← Todas as edições</a>
+    <span class="nav-num">EDIÇÃO #001</span>
+  </nav>
+
+  <!-- HERO DA EDIÇÃO -->
+  <header class="edicao-hero">
+    <div class="edicao-bg"></div>
+    <div class="edicao-content">
+      <div class="edicao-badge">🔥 EDIÇÃO #001 · 14 MAR. 2026</div>
+      <h1 class="edicao-titulo">O Congresso aprovou o quê essa semana — e o que isso significa pra você</h1>
+      <p class="edicao-sub">Sem juridiquês, sem economês. A gente traduz Brasília, explica a Selic e desmonta 5 declarações da direita que não sobreviveram à realidade.</p>
+      <div class="edicao-meta-row">
+        <span class="tag verde">Análise</span>
+        <span class="tag ciano">Aprende aí</span>
+        <span class="tag coral">Fact-check</span>
+        <span>12 min de leitura</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CORPO -->
+  <main class="artigo">
+
+    <!-- BLOCO 1: ANÁLISE PRINCIPAL -->
+    <div class="bloco">
+      <div class="bloco-eyebrow">🔥 A braza da semana</div>
+      <h2 class="bloco-titulo">O que rolou em Brasília — traduzido</h2>
+      <p>Esta semana o Congresso votou a reforma tributária pela segunda vez em menos de três meses. Dessa vez, o foco foi o IBS — o Imposto sobre Bens e Serviços. Em linguagem humana: é a tentativa de simplificar o caos de impostos que qualquer pequena empresa enfrenta no Brasil.</p>
+      <p>O problema? A versão final saiu com dezenas de exceções negociadas por setores que têm lobby forte. Agronegócio, igrejas, fundos de investimento — todos conseguiram tratamento especial. Quem não tem lobby não conseguiu nada.</p>
+
+      <div class="callout verde">
+        <div class="callout-titulo">O que muda pra você na prática</div>
+        <p>No curto prazo, nada. A implementação começa em 2026 e vai até 2033. Mas o desenho que foi aprovado já indica que a conta vai continuar pesada pra quem compra produto e leve pra quem tem patrimônio.</p>
+      </div>
+
+      <p>A direita comemorou como vitória do "mercado livre". Mas mercado livre com dezenas de exceções pra quem tem acesso ao Congresso não é mercado livre — é privilégio com CNPJ.</p>
+    </div>
+
+    <!-- BLOCO 2: APRENDE AÍ -->
+    <div class="bloco">
+      <div class="bloco-eyebrow">📚 Aprende aí</div>
+      <h2 class="bloco-titulo">O que é a taxa Selic e por que ela te afeta direto</h2>
+      <p>Toda semana alguém fala em Selic mas pouca gente explica o que é de fato. Aqui vai em linguagem direta:</p>
+
+      <div class="aprende-bloco">
+        <div class="aprende-termo">Taxa Selic</div>
+        <p class="aprende-def">É a taxa básica de juros da economia brasileira. Definida pelo Banco Central a cada 45 dias, ela funciona como o preço do dinheiro — quando sobe, crédito fica mais caro e a economia esfria; quando cai, crédito fica mais barato e a economia aquece. Hoje está em 13,75% ao ano. Pra ter ideia: nos EUA é 5,5%.</p>
+        <div class="aprende-tags">
+          <span class="aprende-tag">Banco Central</span>
+          <span class="aprende-tag">Juros</span>
+          <span class="aprende-tag">Inflação</span>
+          <span class="aprende-tag">Crédito</span>
+        </div>
+      </div>
+
+      <p>Selic alta beneficia quem tem dinheiro aplicado em renda fixa — ou seja, quem já tem dinheiro. Prejudica quem precisa de crédito pra abrir negócio, comprar imóvel ou simplesmente sobreviver no cheque especial. Não é coincidência que a Faria Lima torça pra Selic ficar alta.</p>
+    </div>
+
+    <!-- BLOCO 3: FACT-CHECK -->
+    <div class="bloco">
+      <div class="bloco-eyebrow">🎯 Eles disseram isso</div>
+      <h2 class="bloco-titulo">5 declarações que não sobreviveram à realidade</h2>
+
+      <div class="factcheck">
+        <div class="factcheck-quote">
+          <blockquote>"O mercado resolve tudo. O Estado só atrapalha."</blockquote>
+          <cite>— Argumento clássico do liberalismo econômico brasileiro, 2024</cite>
+        </div>
+        <div class="factcheck-resp">
+          <p><strong>A realidade:</strong> O mercado resolveu a pandemia? A fila do SUS? A desigualdade Norte-Sul? O Estado tem problemas sérios — mas a solução é fazê-lo funcionar melhor. Países com os melhores índices de desenvolvimento têm Estado forte. Não é coincidência.</p>
+        </div>
+      </div>
+
+      <div class="factcheck">
+        <div class="factcheck-quote">
+          <blockquote>"Privatização é sempre melhor que estatal."</blockquote>
+          <cite>— Frente parlamentar pró-privatizações, fev. 2026</cite>
+        </div>
+        <div class="factcheck-resp">
+          <p><strong>A realidade:</strong> A Sabesp privatizada aumentou tarifas 20% em São Paulo no primeiro ano. A Eletrobrás privatizada cortou investimentos em geração limpa. Privatização não é dogma — é ferramenta. Funciona pra algumas coisas, falha em outras. Tratar como solução universal é ideologia, não economia.</p>
+        </div>
+      </div>
+
+      <div class="callout escuro">
+        <div class="callout-titulo">Por que isso importa</div>
+        <p>Fake news políticas funcionam pela repetição, não pela lógica. A melhor resposta não é a mais raivosa — é a mais clara. Guarda esses argumentos. Você vai precisar deles na próxima jantar de família.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- NAVEGAÇÃO ENTRE EDIÇÕES -->
+  <div class="nav-edicoes">
+    <span style="color:#ccc;">← Edição anterior</span>
+    <a href="../index.html">Todas as edições</a>
+    <span style="color:#ccc;">Próxima edição →</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="../index.html" class="footer-logo">
+      <svg viewBox="0 0 40 52" fill="none">
+        <defs>
+          <linearGradient id="lg-ft2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#2db84b"/>
+            <stop offset="50%"  stop-color="#1A8FD1"/>
+            <stop offset="100%" stop-color="#6C5CE7"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 2 L38 48 Q29 38 20 38 Q11 38 2 48 Z" fill="url(#lg-ft2)"/>
+      </svg>
+      BRAZA
+    </a>
+    <span class="footer-copy">Movimento de esquerda democrática · Edição #001 · 2026</span>
+  </footer>
+
+</body>
+</html>
